@@ -13,11 +13,11 @@
 
 ActiveRecord::Schema.define(version: 20141004170436) do
 
-  create_table "movies", force: true do |t|
-    t.string   "title"
+  create_table "pizzarias", force: true do |t|
+    t.string   "name"
     t.text     "description"
-    t.string   "movie_length"
-    t.string   "director"
+    t.string   "founded"
+    t.string   "owner"
     t.string   "rating"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20141004170436) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "movie_id"
+    t.integer  "pizzaria_id"
   end
 
   create_table "users", force: true do |t|

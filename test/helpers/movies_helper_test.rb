@@ -1,4 +1,4 @@
 require 'test_helper'
 
-class MoviesHelperTest < ActionView::TestCase
+class PizzariasHelperTest < ActionView::TestCase
 end

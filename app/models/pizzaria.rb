@@ -1,4 +1,4 @@
-class Movie < ActiveRecord::Base
+class pizzaria < ActiveRecord::Base
 	searchkick
 	belongs_to :user
 	has_many :reviews

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MovieTest < ActiveSupport::TestCase
+class PizzariaTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

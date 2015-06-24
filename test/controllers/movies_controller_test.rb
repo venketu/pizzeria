@@ -1,14 +1,14 @@
 require 'test_helper'
 
-class MoviesControllerTest < ActionController::TestCase
+class PizzariasControllerTest < ActionController::TestCase
   setup do
-    @movie = movies(:one)
+    @pizzaria = pizzarias(:one)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:movies)
+    assert_not_nil assigns(:pizzarias)
   end
 
   test "should get new" do
@@ -16,34 +16,34 @@ class MoviesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create movie" do
-    assert_difference('Movie.count') do
-      post :create, movie: { description: @movie.description, director: @movie.director, movie_length: @movie.movie_length, rating: @movie.rating, title: @movie.title }
+  test "should create pizzaria" do
+    assert_difference('Pizzaria.count') do
+      post :create, pizzaria: { description: @pizzaria.description, owner: @pizzaria.owner, founded: @pizzaria.founded, rating: @pizzaria.rating, name: @pizzaria.name }
     end
 
-    assert_redirected_to movie_path(assigns(:movie))
+    assert_redirected_to pizzaria_path(assigns(:pizzaria))
   end
 
-  test "should show movie" do
-    get :show, id: @movie
+  test "should show pizzaria" do
+    get :show, id: @pizzaria
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @movie
+    get :edit, id: @pizzaria
     assert_response :success
   end
 
-  test "should update movie" do
-    patch :update, id: @movie, movie: { description: @movie.description, director: @movie.director, movie_length: @movie.movie_length, rating: @movie.rating, title: @movie.title }
-    assert_redirected_to movie_path(assigns(:movie))
+  test "should update pizzaria" do
+    patch :update, id: @pizzaria, pizzaria: { description: @pizzaria.description, owner: @pizzaria.owner, founded: @pizzaria.founded, rating: @pizzaria.rating, name: @pizzaria.name }
+    assert_redirected_to pizzaria_path(assigns(:pizzaria))
   end
 
-  test "should destroy movie" do
-    assert_difference('Movie.count', -1) do
-      delete :destroy, id: @movie
+  test "should destroy pizzaria" do
+    assert_difference('Pizzaria.count', -1) do
+      delete :destroy, id: @pizzaria
     end
 
-    assert_redirected_to movies_path
+    assert_redirected_to pizzarias_path
   end
 end
