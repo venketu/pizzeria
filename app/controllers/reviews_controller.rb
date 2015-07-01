@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
-  before_action :set_pizzaria
+  before_action :set_pizzeria
   before_action :authenticate_user!
 
   def new
@@ -13,10 +13,10 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @review.user_id = current_user.id
-    @review.pizzaria_id = @pizzaria.id
+    @review.pizzeria_id = @pizzeria.id
 
     if @review.save
-      redirect_to @pizzaria
+      redirect_to @pizzeria
     else
       render 'new'
     end
@@ -36,8 +36,8 @@ class ReviewsController < ApplicationController
       @review = Review.find(params[:id])
     end
 
-    def set_pizzaria
-      @pizzaria = Pizzaria.find(params[:pizzaria_id])
+    def set_pizzeria
+      @pizzeria = Pizzeria.find(params[:pizzeria_id])
     end
 
     def review_params

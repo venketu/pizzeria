@@ -1,1 +1,1 @@
-A rating application for pizzarias!
+A rating application for pizzerias!

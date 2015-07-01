@@ -1,4 +1,6 @@
 class Review < ActiveRecord::Base
 	belongs_to :user
-	belongs_to :pizzaria
+	belongs_to :pizzeria
+	validates :rating, presence: true
+    validates :comment, presence: true
 end

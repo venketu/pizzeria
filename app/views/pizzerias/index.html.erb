@@ -1,0 +1,30 @@
+<% if !user_signed_in? %>
+  <div class="jumbotron">
+    <h1>Your Favorite Pizzerias Reviewed</h1>
+    <p>Hashtag hoodie mumblecore selfies. Authentic keffiyeh leggings Kickstarter, narwhal jean shorts XOXO Vice Austin cardigan. Organic drinking vinegar freegan pickled.</p>
+    <p><%= link_to "Sign Up To Write A Review", new_user_registration_path, class: "btn btn-primary btn-lg" %></p>
+  </div>
+<% end %>
+
+<div class="row">
+  <% @pizzerias.each do |pizzeria| %>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <%= pizzeria.name %>
+        <%= link_to (image_tag pizzeria.image.url(:medium), class: 'image'), pizzeria %>
+        <div class="star-rating" data-score= <%= @avg_review[pizzeria.id] %> ></div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+<script>
+    $('.star-rating').raty({
+      path: '/assets/',
+      readOnly: true,
+      score: function() {
+            return $(this).attr('data-score');
+    }
+  });
+</script>

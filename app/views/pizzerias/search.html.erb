@@ -1,0 +1,9 @@
+<div class="row">
+  <% @pizzerias.each do |pizzeria| %>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <%= link_to (image_tag pizzeria.image.url(:small), class: 'image'), pizzeria %>
+      </div>
+    </div>
+  <% end %>
+</div>

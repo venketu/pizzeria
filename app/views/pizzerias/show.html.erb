@@ -1,0 +1,67 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-4">
+        <%= image_tag @pizzeria.image.url(:small) %>
+        <div class="star-rating" data-score= <%= @avg_review %> ></div>
+        <em><%= "#{@reviews.length} reviews" %></em>
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td><strong>Name:</strong></td>
+                <td><%= @pizzeria.name %></td>
+              </tr>
+              <tr>
+                <td><strong>Description:</strong></td>
+                <td><%= @pizzeria.description %></td>
+              </tr>
+              <tr>
+                <td><strong>Address:</strong></td>
+                <td><%= @pizzeria.address %></td>
+              </tr>
+              <tr>
+                <td><strong>Owner:</strong></td>
+                <td><%= @pizzeria.owner %></td>
+              </tr>
+              <tr>
+                <td><strong>Phone:</strong></td>
+                <td><%= @pizzeria.phone %></td>
+              </tr>
+            </tbody>
+          </table>
+          <%= link_to "Write a Review", new_pizzeria_review_path(@pizzeria) %>
+        </div>
+      </div>
+      <div class="col-md-7 col-md-offset-1">
+        <h1 class="review_title"><%= @pizzeria.name %></h1>
+        <p><%= @pizzeria.description %></p>
+
+        <% if @reviews.blank? %>
+          <h3>No reviews just yet, would you like to add the first!</h3>
+          <%= link_to "Write Review", new_pizzeria_review_path(@pizzeria), class: "btn btn-danger" %>
+        <% else %>
+          <% @reviews.each do |review| %>
+            <div class="reviews">
+              <div class="star-rating" data-score= <%= review.rating %> ></div>
+              <p><%= review.comment %></p>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_pizzeria_path(@pizzeria) %> |
+<%= link_to 'Back', pizzerias_path %>
+
+<script>
+    $('.star-rating').raty({
+      path: '/assets/',
+      readOnly: true,
+      score: function() {
+            return $(this).attr('data-score');
+    }
+  });
+</script>

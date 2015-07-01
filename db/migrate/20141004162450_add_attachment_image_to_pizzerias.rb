@@ -1,6 +1,6 @@
 class AddAttachmentImageToPizzerias < ActiveRecord::Migration
   def self.up
-    change_table :pizzarias do |t|
+    change_table :pizzerias do |t|
       t.attachment :image
     end
   end

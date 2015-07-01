@@ -8,10 +8,25 @@ class PizzeriasController < ApplicationController
     else
       @pizzerias = Pizzeria.all
     end
+    avg_reviews
   end
 
   def index
     @pizzerias = Pizzeria.all
+    avg_reviews
+  end
+
+  def avg_reviews
+    @avg_review = Hash.new
+    @pizzerias.each do |pizzeria|
+      @reviews = Review.where(pizzeria_id: pizzeria.id).order("created_at DESC")
+
+      if @reviews.blank?
+        @avg_review[pizzeria.id] = 0
+      else
+        @avg_review[pizzeria.id] = @reviews.average(:rating).round(2)
+      end
+    end
   end
 
   def show
@@ -36,7 +51,7 @@ class PizzeriasController < ApplicationController
 
     respond_to do |format|
       if @pizzeria.save
-        format.html { redirect_to @pizzeria, notice: 'Pizzaria was successfully created.' }
+        format.html { redirect_to @pizzeria, notice: 'Pizzeria was successfully created.' }
         format.json { render :show, status: :created, location: @pizzeria }
       else
         format.html { render :new }
@@ -48,7 +63,7 @@ class PizzeriasController < ApplicationController
   def update
     respond_to do |format|
       if @pizzeria.update(pizzeria_params)
-        format.html { redirect_to @pizzeria, notice: 'Pizzaria was successfully updated.' }
+        format.html { redirect_to @pizzeria, notice: 'Pizzeria was successfully updated.' }
         format.json { render :show, status: :ok, location: @pizzeria }
       else
         format.html { render :edit }
@@ -60,17 +75,17 @@ class PizzeriasController < ApplicationController
   def destroy
     @pizzeria.destroy
     respond_to do |format|
-      format.html { redirect_to pizzerias_url, notice: 'Pizzaria was successfully destroyed.' }
+      format.html { redirect_to pizzerias_url, notice: 'Pizzeria was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     def set_pizzeria
-      @pizzeria = Pizzaria.find(params[:id])
+      @pizzeria = Pizzeria.find(params[:id])
     end
 
     def pizzeria_params
-      params.require(:pizzeria).permit(:title, :description, :pizzeria_length, :director, :rating, :image)
+      params.require(:pizzeria).permit(:name, :description, :address, :owner, :phone, :image)
     end
 end
